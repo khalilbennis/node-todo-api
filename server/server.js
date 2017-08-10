@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser =require('body-parser')
 
 var {mongoose} = require('./db/mongoose');
-var {Todo}=require('./models/todo');
+var {Tod}=require('./models/todo');
 var {User}=require('./models/user');
 
 var app=express();
@@ -22,3 +22,4 @@ todo.save().then((doc)=>{
 app.listen(3000,()=>{
   console.log('started on port 3000');
 });
+module.exports = {app};

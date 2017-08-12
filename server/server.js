@@ -2,12 +2,11 @@ const express = require('express');
 const bodyParser =require('body-parser')
 
 var {mongoose} = require('./db/mongoose');
-<<<<<<< HEAD
-var {Tod}=require('./models/todo');
-=======
+
 var {Todo}=require('./models/todo');
->>>>>>> 1f483e1643ab354ecd6e1e185b08896f7d066781
+
 var {User}=require('./models/user');
+var {ObjectID}=require('mongodb');
 
 var app=express();
 
@@ -23,10 +22,26 @@ todo.save().then((doc)=>{
   }
 );
 });
+
+app.get('/todos/:id',(req,res)=>{
+  var id=req.params.id;
+  if(!ObjectID.isValid(id)) res.status(400).send({error:'invalid id'});
+  else{
+    Todo.findById(id).then((todo)=>{
+      if (!todo) {
+        res.status(404).send({});
+      }
+      else {
+        res.status(200).send(todo);
+      }
+    },(e)=>{
+      res.status(404).send({});
+    });
+  }
+
+});
 app.listen(3000,()=>{
   console.log('started on port 3000');
 });
-<<<<<<< HEAD
+
 module.exports = {app};
-=======
->>>>>>> 1f483e1643ab354ecd6e1e185b08896f7d066781

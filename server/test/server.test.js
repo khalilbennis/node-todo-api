@@ -41,3 +41,19 @@ describe('GET TODO/ID',()=>{
   });
 
 });
+
+describe('delete TODO',()=>{
+
+  it('should remove todo',(done)=>{
+      request(app)
+       .delete(`/todos/598f5a829f84a527349d0d77`)
+       .expect(200)
+       .expect((res)=>{
+         console.log(res.body);
+       })
+       .end(done);
+
+
+
+  });
+});
